@@ -1,5 +1,7 @@
 // Instrucciones
 
+// ------- Las Respuestas se encuentran en las ultimas lineas ------------
+
 /*
 A continuación se presenta una base de datos de los últimos 100 pedidos empacados de Come Verde 
 
@@ -59,6 +61,9 @@ De 11:30 a 3:30 = Turno 2
 
 */
 
+//------------------- Respuestas -------------------------
+
+// Se quiere saber lo siguiente:
 
 const pedidos = [
     {
@@ -4379,3 +4384,74 @@ const pedidos = [
       pickingDate: "2021-07-30T18:42:44.634Z",
     },
   ];
+
+  console.log(pedidos);
+// a) La cantidad de pedidos empacadas por cada persona
+// ---- Con esta respuesta la consola te muestra cuantos resultados hay ----
+const empacados = pedidos.map (function(pedido){
+return pedido.id
+})
+
+console.log(empacados.length) //Respuesta: 100
+
+// b) La cantidad de pcs* empacadas por cada persona
+
+// pedidos.forEach(function(item))
+
+// let total = pedidos.reduce(function (a, b) {
+//     return a + b.lineItems{} * curr.price;
+// },0);
+
+//---- Intento 2--------
+
+// var j=0;
+
+
+// while(j<pedidos.length)
+// {
+//     var obj1={};
+//     var qty; sum=0;
+//     for(i=0; i<pedidos.length; i++)
+//     {
+//       qty=pedidos[i][j].qty;
+//       sum=sum+pedidos[i][j].sum;
+//     }
+//     obj1.qty=qty;
+//     obj1.sum=sum;
+//     j++;
+// }
+
+// console.log(total);
+
+
+    for (let i = 0; i<pedidos.length; i++){
+        for(let k=0; k<pedidos[i].lineItems.length; k++){
+            // console.log(pedidos[i].lineItems[k]);
+            for(let j=0; j<pedidos[i].lineItems[k].qty; j++){
+                console.log(pedidos[i].lineItems[k].qty);
+
+        }
+
+        // console.log(pedidos[i])
+        
+    }   
+    console.log("----------------------------")
+    }
+
+// Intento 3
+
+
+
+// console.log(pedidos[0].lineItems)
+
+
+// c) La cantidad de pedidos pickeados por cada persona
+// d) La cantidad de pcs* pickeados por cada persona
+
+// e) Total por turno (Turno 1 y Turno 2) en embalaje
+// f) Total por turno (Turno 1 y Turno 2) en picking
+
+// Extra:
+// g) El tiempo promedio de un pedido desde que se pickea hasta que se empaca
+
+
