@@ -1,0 +1,39 @@
+// b) La cantidad de pcs* empacadas por cada persona
+
+// pedidos.forEach(function(item))
+
+// let total = pedidos.reduce(function (a, b) {
+//     return a + b.lineItems{} * curr.price;
+// },0);
+
+//---- Intento 2--------
+
+// var j=0;
+
+
+// while(j<pedidos.length)
+// {
+//     var obj1={};
+//     var qty; sum=0;
+//     for(i=0; i<pedidos.length; i++)
+//     {
+//       qty=pedidos[i][j].qty;
+//       sum=sum+pedidos[i][j].sum;
+//     }
+//     obj1.qty=qty;
+//     obj1.sum=sum;
+//     j++;
+// }
+
+// console.log(total);
+
+
+// c) La cantidad de pedidos pickeados por cada persona
+// for (let i = 0; i<pedidos.length; i++){
+//     for(let k=0; k<pedidos[i].pickingInfo.length; k++){
+//         console.log(pedidos[i].pickingInfo);
+    
+// }   
+
+// console.log("----------------------------")
+// }
