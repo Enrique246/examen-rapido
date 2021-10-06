@@ -4412,3 +4412,19 @@ Object.keys(pedidosEmpacados).forEach((key)=>{
   pedidosEmpacadosPorNombre.push({Nombre: operatorName, Cantidad: pedidosEmpacados[key]})
 })
 console.log(pedidosEmpacadosPorNombre)
+
+
+
+//extra
+const diffInMilliseconds = (pickingDate,embalajeDate) => Math.abs(new Date(pickingDate) - new Date(embalajeDate));
+
+//diferencia total en milisegundos
+const totalMilisegundos = pedidos.reduce((accumulator,current) => (
+  accumulator = accumulator + diffInMilliseconds(current.pickingDate, current.embalajeDate)
+),0)
+
+//diferencia total en minutos
+const totalEnMinutos =(totalMilisegundos / (1000 * 60)).toFixed(1);
+
+// resultado
+const promedioTotal = totalEnMinutos / pedidos.length 
