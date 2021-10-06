@@ -4389,116 +4389,26 @@ const pedidos = [
 // a) La cantidad de pedidos empacadas por cada persona
 // ---- Con esta respuesta la consola te muestra cuantos resultados hay ----
 
-// En el caso de que solo sean la cantidad de pedidos:
-const empacados = pedidos.map (function(pedido){
-return pedido.id
-})
+const pedidosEmpacados = pedidos.reduce((accumulator,current) => {
 
-console.log(empacados) //Respuesta: 100
-
-//------- En el caso de que fuesen los lineItems de todos los empacadores:
-for (let i = 0; i<pedidos.length; i++){
-    for(let k=0; k<pedidos[i].lineItems.length; k++){
-        // console.log(pedidos[i].lineItems[k]);
-    
-}   
-console.log(pedidos[i].packingInfo.operatorName)
-console.log(pedidos[i].lineItems)
-console.log("----------------------------")// Se agrega una linea para distiguir donde inicia y termina cada empleado
-}
-
-// b) La cantidad de pcs* empacadas por cada persona
-
-//------------- Intento 3 ----------
-//--------- Logré que se sumaran las cantidades aunque me falto hacer que se reiniciara el conteo si se encontraba con un diferente string
-let sumaPiezas = 0;
-    for (let i = 0; i<pedidos.length; i++){
-        for(let k=0; k<pedidos[i].lineItems.length; k++){
-            // console.log(pedidos[i].lineItems[k]);
-            for(let j=0; j<pedidos[i].lineItems[k].qty; j++){
-                // if (pedidos[i].packingInfo.operatorName === "María Jacqueline Martínez"){
-                //     continue;
-                    
-                // }
-                // else{
-                console.log("-------Cantidad---------")
-                console.log(pedidos[i].lineItems[k].qty);
-                    // Suma de piezas
-                     sumaPiezas += pedidos[i].lineItems[k].qty;
-                     console.log("-----Suma de piezas-------")
-                     console.log(sumaPiezas)
-                // }
-                
-
-// console.log(pedidos[i].packingInfo.operatorName)
-        // console.log(pedidos[i])
-        // console.log(sumaPiezas)
-
-            }
-
-    }   
-
-    console.log("----------------------------")
-
+    if(accumulator[current.packingInfo.operatorID] == undefined){
+      accumulator[current.packingInfo.operatorID] = 1
+    }else{
+      accumulator[current.packingInfo.operatorID] = accumulator[current.packingInfo.operatorID] + 1
     }
 
+    return accumulator
 
-// c) La cantidad de pedidos pickeados por cada persona
+},{})
 
-const picking = pedidos.map (function(pedido){
-    return pedido.pickingDate
-    })
-    
-    console.log(picking.length);
-    console.log(picking);
+//returns them with id, if name is needed another mapping is needed but should be ez
+console.log(pedidosEmpacados)
+const pedidosEmpacadosPorNombre = []
 
-// d) La cantidad de pcs* pickeados por cada persona
-    //---  NO estoy seguro de cual es la cantidad a sumar para esta parte, pero es muy similar a la respuesta b
-// e) Total por turno (Turno 1 y Turno 2) en embalaje
-// ---- NO estoy seguro de si aquí es total de tiempo o cantidad
-// f) Total por turno (Turno 1 y Turno 2) en picking
-// ---- NO estoy seguro de si aquí es total de tiempo o cantidad
+//find operator by key, create a new array with results
+Object.keys(pedidosEmpacados).forEach((key)=>{
 
-// Extra:
-// g) El tiempo promedio de un pedido desde que se pickea hasta que se empaca
-
-//---No alcance a hacer la parte de separar los numeros y sacar los promedios.
-const tiempo = pedidos.map (function(pedido){
-    //Embalaje Date
-    var txt = pedido.embalajeDate
-    var numb = txt.match(/\d/g);
-    numb = numb.join("");
-   console.log(numb)
-
-   var txt2 = pedido.pickingDate
-   var numb2 = txt2.match(/\d/g);
-    numb2 = numb2.join("");
-   console.log(numb2)
-
-   //-------- Parte incompleta
-// Promedio bruto
-//    let promedioHrs = ((numb2[8],[9] - numb2[8],[9])/24)/2
-//    let promedioHrs = (numb2[8],[9])
-// Promedio en hrs
-//    let promMin = ((numb2 [10],[11]) - (numb [10],[11])/60)/2
-// Promedio en min
-    // let promSeg= ((numb2 [12],[13]) + (numb [12],[13]))/2
-
-//     console.log("-Promedio HRS-")
-//     console.log(promedioHrs)
-//     console.log ("-Promedio en Minutos-")
-//    console.log(promMin)
-//    console.log ("-Promedio en Segundos-")
-//    console.log(promSeg)
-
-
-
-//    console.log("------------------------")
-
-
-    // return pedido.embalajeDate, pedido.pickingDate
-    
-    })
-    
-    // console.log(tiempo)
-
+  const operatorName = pedidos.find(x=> x.packingInfo.operatorID == key).packingInfo.operatorName
+  pedidosEmpacadosPorNombre.push({Nombre: operatorName, Cantidad: pedidosEmpacados[key]})
+})
+console.log(pedidosEmpacadosPorNombre)
